@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.env
+
+# Node
+node_modules/
+dist/
+.npm
+.eslintcache
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+SOLUTION.md
