@@ -31,10 +31,10 @@ completion = client.chat.completions.parse(
     response_format=CalendarEvent,
 )
 
-event = completion.choices[0].message.parsed
+calendar_event = completion.choices[0].message.parsed
 
 # event json
-print(event.model_dump())
+print(calendar_event.model_dump())
 ```
 
 
