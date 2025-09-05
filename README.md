@@ -1,7 +1,5 @@
 # Address Normalizer Challenge
 
-**Time Limit:** 30 minutes  
-**Difficulty:** Senior SWE
 
 ## Your Task
 
