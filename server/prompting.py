@@ -10,6 +10,9 @@ You need to:
 
 from typing import Dict, Any
 from pydantic import BaseModel
+from openai import OpenAI
+
+client = OpenAI()
 
 # TODO: Define proper Pydantic models for structured output
 # These models will be used with OpenAI's response_format parameter
@@ -34,6 +37,5 @@ def normalize_with_ai(name: str, address: str) -> Dict[str, Any]:
     """
 
     return {
-        "name": "NOT IMPLEMENTED",
-        "address": "NOT IMPLEMENTED"
+        "result": "NOT IMPLEMENTED"
     }

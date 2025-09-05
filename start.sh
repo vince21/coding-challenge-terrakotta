@@ -21,6 +21,31 @@ if ! command -v node &> /dev/null; then
     exit 1
 fi
 
+# Check for OpenAI API key from environment or .env file
+if [ -f ".env" ]; then
+    source .env
+fi
+
+if [ -z "$OPENAI_API_KEY" ]; then
+    echo -e "${BLUE}🔑 Please enter your OpenAI API key:${NC}"
+    read -s OPENAI_API_KEY
+    echo ""
+    
+    if [ -z "$OPENAI_API_KEY" ]; then
+        echo -e "${RED}❌ OpenAI API key is required${NC}"
+        exit 1
+    fi
+    
+    # Save to .env file for future runs
+    echo "OPENAI_API_KEY=$OPENAI_API_KEY" > .env
+    echo -e "${GREEN}✅ OpenAI API key set and saved${NC}"
+else
+    echo -e "${GREEN}✅ OpenAI API key loaded${NC}"
+fi
+
+export OPENAI_API_KEY
+echo ""
+
 # Kill any existing processes on our ports
 echo "📋 Cleaning up any existing processes..."
 lsof -ti:8001 | xargs kill -9 2>/dev/null
@@ -40,7 +65,7 @@ source venv/bin/activate 2>/dev/null || . venv/Scripts/activate 2>/dev/null || {
 }
 
 pip install -q -r requirements.txt
-python app.py &
+OPENAI_API_KEY=$OPENAI_API_KEY python app.py &
 BACKEND_PID=$!
 cd ..
 
@@ -69,9 +94,8 @@ echo "📍 Frontend: http://localhost:5173"
 echo "📍 Backend:  http://localhost:8001"
 echo ""
 echo "📖 Instructions:"
-echo "1. Fix the prompt in server/prompting.py"
-echo "2. Complete the models in server/models.py"
-echo "3. Wire up the frontend to display results nicely"
+echo "1. Create a prompt + models in server/prompting.py"
+echo "2. Wire up the frontend to display results nicely"
 echo ""
 echo "Press Ctrl+C to stop all servers"
 echo ""
