@@ -1,8 +1,5 @@
 # Address Normalizer Challenge
 
-
-## Your Task
-
 - <span style="color:red">**Problem:**</span> Terrakotta customers often enter messy, unstructured address data into the platform.
 - <span style="color:green">**Goal:**</span> Build a system that takes messy, real-world address data and normalizes / structures it using OpenAI's **structured outputs** feature ([see docs](https://platform.openai.com/docs/guides/structured-outputs)).
 
@@ -42,7 +39,7 @@ print(event.model_dump())
 
 
 ## 3. **Showcase Results in the Frontend**
-- **Wire up the frontend** to display the normalized data in a clear, user-friendly way in **App.tsx**
+- **Wire up the frontend** to display the normalized data in a clear, user-friendly way in `App.tsx`
 
 ## Setup
 
