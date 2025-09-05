@@ -3,82 +3,63 @@
 **Time Limit:** 30 minutes  
 **Difficulty:** Senior SWE
 
-## 🎯 Your Task
+## Your Task
 
-Build a system that takes messy, real-world address data and normalizes it using OpenAI's **structured outputs** feature. You'll need to:
+- <span style="color:red">**Problem:**</span> Terrakotta customers often enter messy, unstructured address data into the platform.
+- <span style="color:green">**Goal:**</span> Build a system that takes messy, real-world address data and normalizes / structures it using OpenAI's **structured outputs** feature ([see docs](https://platform.openai.com/docs/guides/structured-outputs)).
 
-1. **Implement Pydantic models** for structured output in `server/prompting.py`
-2. **Use OpenAI's response_format** to get reliable JSON output
-3. **Complete the TODO sections** in models and backend
-4. **Wire up the frontend** to display results nicely
+## 1. **Design Your Data Models**
+- <span style="color:green">**Start Here:**</span> create Pydantic models in `server/prompting.py`
+- This design will be free-form but your models should be thoughtfully structured for real-world use, clarity, and style
 
-## 🚀 Quick Start (2 minutes)
+## 2. **Leverage OpenAI's Structured Outputs**
+- **Use the `response_format` parameter** to ensure the API returns output that matches your Pydantic models
+
+
+```python
+from pydantic import BaseModel
+from openai import OpenAI
+
+client = OpenAI()
+
+class CalendarEvent(BaseModel):
+    name: str
+    date: str
+    participants: list[str]
+
+completion = client.chat.completions.parse(
+    model="gpt-4o-2024-08-06",
+    messages=[
+        {"role": "system", "content": "Extract the event information."},
+        {"role": "user", "content": "Alice and Bob are going to a science fair on Friday."},
+    ],
+    response_format=CalendarEvent,
+)
+
+event = completion.choices[0].message.parsed
+
+# event json
+print(event.model_dump())
+```
+
+
+## 3. **Showcase Results in the Frontend**
+- **Wire up the frontend** to display the normalized data in a clear, user-friendly way in **App.tsx**
+
+## Setup
+
+- Visit [github codespaces](https://github.com/features/codespaces) and create an instance
+
+- Clone the repo
+
+```
+git clone https://github.com/vince21/coding-challenge-terrakotta.git
+```
+
+- Run this command
 
 ```bash
-# One command to start everything:
 ./start.sh
-
-# Or manually:
-cd server && python app.py &
-cd client && npm install && npm run dev
 ```
 
 Then open http://localhost:5173
-
-## 📋 Requirements
-
-### Core Tasks (Must Complete)
-- [ ] Fix the GPT prompt to reliably parse addresses into structured format
-- [ ] Complete the Pydantic models in `server/models.py`
-- [ ] Handle edge cases (apartments, PO boxes, international addresses)
-- [ ] Display the normalized data cleanly in the UI
-
-### Bonus Points
-- [ ] Add input validation
-- [ ] Show confidence scores
-- [ ] Handle errors gracefully
-- [ ] Add tests for edge cases
-
-## 🧪 Test Cases to Handle
-
-Your solution should handle these inputs correctly:
-
-```
-Easy:
-- "John Smith", "123 Main St, Seattle, WA 98101"
-
-Medium:
-- "María García-López", "456 Oak Ave Apt 3B, San Francisco, CA"
-- "Dr. James O'Brien Jr.", "PO Box 789, New York, NY 10001"
-
-Hard:
-- "李明 (Li Ming)", "1-2-3 Shibuya, Tokyo, Japan 150-0002"
-- "Jean-Baptiste de la Fontaine", "15 Rue de la Paix, 75002 Paris, France"
-```
-
-## 💡 Hints
-
-1. **Structured Outputs:** Use `response_format=YourModel` in OpenAI's API for guaranteed structure
-2. **Pydantic Models:** Define models that match your exact needs - OpenAI will follow them
-3. **System Prompt:** Even with structured output, a good system prompt helps accuracy
-4. **Validation:** Pydantic validates automatically with structured outputs
-5. **Example:** Check OpenAI docs for `client.chat.completions.parse()` usage
-
-## 📊 Evaluation Criteria
-
-- **Works End-to-End (30%):** Form submission → API → Display
-- **Structured Output Implementation (40%):** Proper Pydantic models, uses response_format correctly
-- **Code Quality (20%):** Clean, readable, proper error handling
-- **Bonus Features (10%):** Confidence scores, validation, tests, UX improvements
-
-## 🔧 Tech Stack
-
-- Backend: Python/Flask + OpenAI API (mocked for testing)
-- Frontend: React + TypeScript + Vite
-- Models: Pydantic for validation
-
-## 📝 Submission
-
-When done, run `./test.sh` to verify your solution works with our test cases.
-
-Good luck! 🚀
