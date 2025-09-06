@@ -14,17 +14,12 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const [testCases, setTestCases] = useState<any>(null)
 
-  // TODO: Implement form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
     
-    try {
-      // TODO: Call the backend /normalize endpoint
-      // TODO: Handle the response properly
-      // TODO: Display structured data nicely
-      
+    try {      
       const response = await fetch('/api/normalize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -153,7 +148,7 @@ function App() {
             <h2>Normalized Result</h2>
             {/* TODO: Make this display better! */}
             {/* Consider showing person and address in a nice format */}
-            {/* Show confidence scores if available */}
+            {/* Extra Credit: Show the persisted normalized data if available */}
             <pre>{JSON.stringify(result, null, 2)}</pre>
           </div>
         )}

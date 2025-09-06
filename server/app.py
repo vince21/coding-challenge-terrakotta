@@ -17,22 +17,14 @@ logger = logging.getLogger(__name__)
 
 @app.route('/normalize', methods=['POST'])
 def normalize():
-    """
-    TODO: Complete this endpoint to:
-    1. Validate the input using Pydantic
-    2. Call the AI normalizer with a good prompt
-    3. Parse and validate the response
-    4. Return structured data
-    """
     try:
         # Parse request
         data = request.get_json()
 
-        # TODO: Call AI with better prompt
         name = data.get('name', '')
         address = data.get('address', '')
         
-        # This will currently fail with the broken prompt
+        # This is not currently implemented
         ai_response = normalize_with_ai(name, address)
         
         return jsonify(ai_response)

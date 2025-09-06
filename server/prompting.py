@@ -1,6 +1,4 @@
 """
-CANDIDATE TODO: Fix this module!
-
 The current implementation is broken and produces inconsistent results.
 You need to:
 1. Define proper Pydantic models for structured output
