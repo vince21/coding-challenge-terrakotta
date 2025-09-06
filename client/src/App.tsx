@@ -70,7 +70,16 @@ function App() {
   return (
     <div className="container">
       <div className="card">
-        <h1>🏠 Address Normalizer</h1>
+        <h2 style={{ display: 'flex', alignItems: 'center', fontSize: '2rem', marginBottom: '1rem' }}>
+          <img
+            src={'/images/logo.png'}
+            alt="Terrakotta Logo"
+            className="logo"
+            style={{ width: 40, height: 40, marginRight: 12 }}
+          />
+          Terrakotta Coding Challenge:
+        </h2>
+        <h1>Address Normalizer</h1>
         <p className="subtitle">Enter a name and address to normalize into structured data</p>
 
         <form onSubmit={handleSubmit} className="form">
@@ -108,21 +117,25 @@ function App() {
           <div className="test-cases">
             <h3>Quick Test Cases:</h3>
             <div className="test-case-grid">
-              {Object.entries(testCases).map(([level, cases]: [string, any]) => (
-                <div key={level} className="test-case-section">
-                  <h4>{level.charAt(0).toUpperCase() + level.slice(1)}</h4>
-                  {cases.map((tc: TestCase, idx: number) => (
-                    <button
-                      key={idx}
-                      onClick={() => applyTestCase(tc)}
-                      className="test-case-btn"
-                      title={`${tc.name} - ${tc.address}`}
-                    >
-                      {tc.name.split(' ')[0]}
-                    </button>
-                  ))}
-                </div>
-              ))}
+              {['easy', 'medium', 'hard'].map(level => 
+                testCases[level] && (
+                  <div key={level} className="test-case-section">
+                    <h4>{level.charAt(0).toUpperCase() + level.slice(1)}</h4>
+                    {testCases[level].map((tc: TestCase, idx: number) => (
+                      <button
+                        key={idx}
+                        onClick={() => applyTestCase(tc)}
+                        className="test-case-btn"
+                        title={`${tc.name} - ${tc.address}`}
+                      >
+                        <span className="test-case-btn-text">
+                          {tc.name.split(' ')[0]}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )
+              )}
             </div>
           </div>
         )}

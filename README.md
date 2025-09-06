@@ -23,7 +23,7 @@ class CalendarEvent(BaseModel):
     participants: list[str]
 
 completion = client.chat.completions.parse(
-    model="gpt-4o-2024-08-06",
+    model="gpt-4o",
     messages=[
         {"role": "system", "content": "Extract the event information."},
         {"role": "user", "content": "Alice and Bob are going to a science fair on Friday."},

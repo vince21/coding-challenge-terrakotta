@@ -47,14 +47,14 @@ input {
 
 input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #ffab20;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .submit-btn {
   width: 100%;
   padding: 14px 24px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f97316 0%, #ffab20 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -91,6 +91,11 @@ input:focus {
   gap: 20px;
 }
 
+.test-case-section {
+  flex: 1;
+  min-width: 0;
+}
+
 .test-case-section h4 {
   font-size: 14px;
   text-transform: uppercase;
@@ -99,8 +104,11 @@ input:focus {
 }
 
 .test-case-btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  min-height: 36px;
   padding: 8px 12px;
   margin-bottom: 8px;
   background: white;
@@ -109,12 +117,20 @@ input:focus {
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
+  overflow: hidden;
+}
+
+.test-case-btn-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .test-case-btn:hover {
-  background: #667eea;
+  background: #f97316;
   color: white;
-  border-color: #667eea;
+  border-color: #f97316;
 }
 
 .error {
