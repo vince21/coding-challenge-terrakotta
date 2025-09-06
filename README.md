@@ -58,3 +58,10 @@ git clone https://github.com/vince21/coding-challenge-terrakotta.git
 ```
 
 Then open http://localhost:5173
+
+
+## Extra Credit: Persistence
+
+- Use your favorite tool for persisting inputs and their normalized outputs on either the client or server side
+- Recommendations: Pickle, Sqlite, IndexedDB
+- Render the saved data to the client side in a feed
